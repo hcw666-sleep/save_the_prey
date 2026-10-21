@@ -1,0 +1,431 @@
+{
+  "seed": 5000,
+  "model": "models/visual_policy.npz",
+  "mlp_weight": 0.25,
+  "episodes": 24,
+  "rates": {
+    "success": 0.9166666666666666,
+    "captured": 0.041666666666666664,
+    "obstacle_collision": 0.0,
+    "out_of_bounds": 0.0,
+    "timeout": 0.041666666666666664
+  },
+  "mean_steps": 109.625,
+  "counts": {
+    "success": 22,
+    "captured": 1,
+    "obstacle_collision": 0,
+    "out_of_bounds": 0,
+    "timeout": 1
+  },
+  "episodes_detail": [
+    {
+      "name": "random_shelter_01",
+      "status": "success",
+      "steps": 111,
+      "prey_final": [
+        0.13416052349938634,
+        -0.49798834505162526
+      ],
+      "predator_final": [
+        0.22111638392929622,
+        -0.3750042675880912
+      ],
+      "shelter": [
+        0.195,
+        -0.53
+      ]
+    },
+    {
+      "name": "random_shelter_02",
+      "status": "success",
+      "steps": 76,
+      "prey_final": [
+        0.6940116147582022,
+        0.14176527262626373
+      ],
+      "predator_final": [
+        0.6975397331253276,
+        0.27446166962345775
+      ],
+      "shelter": [
+        0.757,
+        0.121
+      ]
+    },
+    {
+      "name": "random_shelter_03",
+      "status": "success",
+      "steps": 59,
+      "prey_final": [
+        0.22066013847621757,
+        0.12307245438418418
+      ],
+      "predator_final": [
+        0.1899942207227714,
+        0.3154869699580313
+      ],
+      "shelter": [
+        0.25,
+        0.065
+      ]
+    },
+    {
+      "name": "random_shelter_04",
+      "status": "timeout",
+      "steps": 1200,
+      "prey_final": [
+        0.08568915372931166,
+        0.3441287329145024
+      ],
+      "predator_final": [
+        0.029172756737304448,
+        0.47915318259642004
+      ],
+      "shelter": [
+        -0.057,
+        0.346
+      ]
+    },
+    {
+      "name": "random_shelter_05",
+      "status": "success",
+      "steps": 61,
+      "prey_final": [
+        0.618563219385362,
+        0.5944127686018124
+      ],
+      "predator_final": [
+        0.4296130517343325,
+        0.6249738910558473
+      ],
+      "shelter": [
+        0.66,
+        0.54
+      ]
+    },
+    {
+      "name": "random_shelter_06",
+      "status": "success",
+      "steps": 75,
+      "prey_final": [
+        0.023120708829239472,
+        -0.6005958612393681
+      ],
+      "predator_final": [
+        -0.05010017783509678,
+        -0.5206422465125655
+      ],
+      "shelter": [
+        0.084,
+        -0.6
+      ]
+    },
+    {
+      "name": "random_shelter_07",
+      "status": "success",
+      "steps": 72,
+      "prey_final": [
+        0.5970078269411718,
+        0.16280601486085444
+      ],
+      "predator_final": [
+        0.6226429412303376,
+        0.30853329809501306
+      ],
+      "shelter": [
+        0.603,
+        0.09
+      ]
+    },
+    {
+      "name": "random_shelter_08",
+      "status": "success",
+      "steps": 37,
+      "prey_final": [
+        -0.04499141259630203,
+        0.534567378400444
+      ],
+      "predator_final": [
+        0.048553990371206834,
+        0.12609439292321284
+      ],
+      "shelter": [
+        0.024,
+        0.507
+      ]
+    },
+    {
+      "name": "random_shelter_09",
+      "status": "success",
+      "steps": 43,
+      "prey_final": [
+        0.10728010751129594,
+        0.6906550803823707
+      ],
+      "predator_final": [
+        0.07316435733377975,
+        0.31022120135878173
+      ],
+      "shelter": [
+        0.174,
+        0.687
+      ]
+    },
+    {
+      "name": "random_shelter_10",
+      "status": "success",
+      "steps": 65,
+      "prey_final": [
+        -0.5627833889343853,
+        -0.6911388603392157
+      ],
+      "predator_final": [
+        -0.6435117295486822,
+        -0.5564806513967596
+      ],
+      "shelter": [
+        -0.532,
+        -0.745
+      ]
+    },
+    {
+      "name": "random_shelter_11",
+      "status": "success",
+      "steps": 60,
+      "prey_final": [
+        -0.29306262099334013,
+        -0.46731093659423373
+      ],
+      "predator_final": [
+        -0.4539938757837336,
+        -0.3902786788952532
+      ],
+      "shelter": [
+        -0.246,
+        -0.512
+      ]
+    },
+    {
+      "name": "random_shelter_12",
+      "status": "success",
+      "steps": 88,
+      "prey_final": [
+        0.34883476516402157,
+        -0.3289123772119763
+      ],
+      "predator_final": [
+        0.29330444740848044,
+        -0.23937250298245075
+      ],
+      "shelter": [
+        0.375,
+        -0.372
+      ]
+    },
+    {
+      "name": "random_shelter_13",
+      "status": "success",
+      "steps": 66,
+      "prey_final": [
+        -0.3327185798751054,
+        -0.6342058510139645
+      ],
+      "predator_final": [
+        -0.45619670651640465,
+        -0.5590228003543608
+      ],
+      "shelter": [
+        -0.322,
+        -0.695
+      ]
+    },
+    {
+      "name": "random_shelter_14",
+      "status": "success",
+      "steps": 52,
+      "prey_final": [
+        -0.7418466538307283,
+        -0.37590454202358864
+      ],
+      "predator_final": [
+        -0.5951259216403644,
+        -0.20128931767568725
+      ],
+      "shelter": [
+        -0.728,
+        -0.435
+      ]
+    },
+    {
+      "name": "random_shelter_15",
+      "status": "success",
+      "steps": 81,
+      "prey_final": [
+        0.13152055881662195,
+        -0.6781563154507586
+      ],
+      "predator_final": [
+        0.053799223642066574,
+        -0.6116371541549959
+      ],
+      "shelter": [
+        0.204,
+        -0.689
+      ]
+    },
+    {
+      "name": "random_shelter_16",
+      "status": "success",
+      "steps": 32,
+      "prey_final": [
+        -0.5382117624684266,
+        0.176223028798713
+      ],
+      "predator_final": [
+        -0.03869146653936373,
+        -0.12345851796677033
+      ],
+      "shelter": [
+        -0.523,
+        0.103
+      ]
+    },
+    {
+      "name": "random_shelter_17",
+      "status": "success",
+      "steps": 75,
+      "prey_final": [
+        0.36938998237637394,
+        -0.17120086686996233
+      ],
+      "predator_final": [
+        0.3190196526579203,
+        -0.06240114092487814
+      ],
+      "shelter": [
+        0.422,
+        -0.199
+      ]
+    },
+    {
+      "name": "random_shelter_18",
+      "status": "success",
+      "steps": 35,
+      "prey_final": [
+        -0.715749204865315,
+        0.10502678973286415
+      ],
+      "predator_final": [
+        -0.13911383389549592,
+        -0.12048496705127448
+      ],
+      "shelter": [
+        -0.751,
+        0.041
+      ]
+    },
+    {
+      "name": "random_shelter_19",
+      "status": "success",
+      "steps": 25,
+      "prey_final": [
+        -0.3045984492458061,
+        0.7084429135558523
+      ],
+      "predator_final": [
+        0.19144465795924986,
+        -0.17462831862940173
+      ],
+      "shelter": [
+        -0.238,
+        0.733
+      ]
+    },
+    {
+      "name": "random_shelter_20",
+      "status": "captured",
+      "steps": 48,
+      "prey_final": [
+        -0.10425097904521499,
+        0.40524402832190287
+      ],
+      "predator_final": [
+        -0.11124550728478572,
+        0.36280750980342513
+      ],
+      "shelter": [
+        -0.043,
+        0.18
+      ]
+    },
+    {
+      "name": "random_shelter_21",
+      "status": "success",
+      "steps": 46,
+      "prey_final": [
+        -0.6971541847102883,
+        -0.16470204730649726
+      ],
+      "predator_final": [
+        -0.44271477810573834,
+        -0.09868819382656972
+      ],
+      "shelter": [
+        -0.663,
+        -0.23
+      ]
+    },
+    {
+      "name": "random_shelter_22",
+      "status": "success",
+      "steps": 94,
+      "prey_final": [
+        0.3652463262748854,
+        0.18199559631622753
+      ],
+      "predator_final": [
+        0.47706264702737694,
+        0.15355858055206084
+      ],
+      "shelter": [
+        0.364,
+        0.113
+      ]
+    },
+    {
+      "name": "random_shelter_23",
+      "status": "success",
+      "steps": 72,
+      "prey_final": [
+        0.4424606387090627,
+        -0.09018729526477
+      ],
+      "predator_final": [
+        0.3671523429188682,
+        0.0043076106742292175
+      ],
+      "shelter": [
+        0.508,
+        -0.067
+      ]
+    },
+    {
+      "name": "random_shelter_24",
+      "status": "success",
+      "steps": 58,
+      "prey_final": [
+        -0.6342029271769241,
+        -0.5410925318723909
+      ],
+      "predator_final": [
+        -0.6525267739364848,
+        -0.36320119711977816
+      ],
+      "shelter": [
+        -0.575,
+        -0.586
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "layouts": [
+    {
+      "name": "shelter_vertical_reflection",
+      "prey": [-0.5, 0.5],
+      "predator": [0.0, 0.0],
+      "shelter": [0.5, -0.5],
+      "obstacles": [[-0.35, 0.35], [0.35, 0.35], [0.0, -0.35]]
+    }
+  ]
+}
