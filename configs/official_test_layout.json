@@ -1,7 +1,7 @@
 {
   "layouts": [
     {
-      "name": "shelter_vertical_reflection",
+      "name": "official_test_condition",
       "prey": [-0.5, 0.5],
       "predator": [0.0, 0.0],
       "shelter": [0.5, -0.5],

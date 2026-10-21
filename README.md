@@ -36,35 +36,19 @@ python scripts.py evaluate --model models/visual_policy.npz --episodes 30 --seed
 
 ## 动画演示
 
-在 Windows 桌面环境中播放第五组测试条件：
+在 Windows 桌面环境中单次播放正式测试条件：
 
 ```bash
-python scripts.py play --layouts configs/five_shelter_demo.json --mlp-weight 0.25
+python scripts.py play --layouts configs/official_test_layout.json --mlp-weight 0.25
 ```
 
-该布局固定追击者初始位置 `[0, 0]`、被追者初始位置 `[-0.5, 0.5]`、目标点 `[0.5, -0.5]`。
-
-如需录制不同 shelter 位置，可使用固定的随机布局：
-
-```bash
-python scripts.py play --layouts configs/random_shelter_demo_24.json --mlp-weight 0.25 --fps 15
-```
-
-共 24 个不同的 shelter 位置。这组位置与初始猎物至少相距 0.5，并避开障碍物和捕食者附近，减少开场很快结束或目标紧贴障碍的情况。`--fps 15` 会放慢动画。窗口左侧显示当前轮数；每轮结束后会停留在结果画面，点击“下一布局”或按右方向键后才开始下一轮。每次运行使用相同的位置，便于重复录制。
-
-播放正式布局时，将正式坐标保存为 `configs/official_layouts.json`，再运行：
-
-```bash
-python scripts.py play --layouts configs/official_layouts.json --mlp-weight 0.25
-```
-
-窗口默认以 600 像素画面显示，确保控制按钮可见。窗口提供暂停/继续、重新开始、切换布局控制；空格暂停，`R` 重开，右方向键切换布局，`F11` 全屏，`Esc` 退出全屏。`--fps` 可调整播放速度，例如 `--fps 20`；`--display-size` 可调整画面尺寸。动画使用项目的 Pillow 独立环境，不是原始 Pyglet 渲染器。
+该布局固定追击者初始位置 `[0, 0]`、被追者初始位置 `[-0.5, 0.5]`、目标点 `[0.5, -0.5]`。每次启动只运行这一轮；窗口提供暂停/继续、重新开始、全屏控制，空格暂停，`R` 重开，`F11` 全屏，`Esc` 退出全屏。`--fps` 可调整播放速度，`--display-size` 可调整画面尺寸。动画使用项目的 Pillow 独立环境，不是原始 Pyglet 渲染器。
 
 布局读取器要求坐标为 `[-1, 1]` 内的有限二维数值，每个布局恰有 3 个有限障碍物坐标，且猎物初始位置不能与捕食者或障碍物重叠。若近距离障碍物在 RGB 图像中连成一片，感知会聚类估计三个中心；可见障碍像素少于 20 时，会复制可见中心，完全不可见时会使用中性占位中心。此时策略的避障信息已降级，但评估流程仍可继续。
 
 ## 正式布局
 
-`configs/official_layouts.example.json` 使用指定初始坐标：猎物 `[-0.5, 0.5]`、猎手 `[0, 0]`、目标 `[0.5, -0.5]`。如需使用老师公布的其他坐标，复制该文件并替换坐标，保存为 `configs/official_layouts.json`。坐标使用 `[-1, 1]` 范围内的世界坐标，每个布局包含三个障碍物位置。运行：
+`configs/official_test_layout.json` 使用指定测试坐标：猎物 `[-0.5, 0.5]`、猎手 `[0, 0]`、目标 `[0.5, -0.5]`。如需使用老师公布的其他坐标，复制 `configs/official_layouts.example.json` 并替换坐标，保存为 `configs/official_layouts.json`。坐标使用 `[-1, 1]` 范围内的世界坐标，每个布局包含三个障碍物位置。运行：
 
 ```bash
 python scripts.py evaluate --model models/visual_policy.npz --layouts configs/official_layouts.json --mlp-weight 0.25 --output results/official.json
@@ -74,7 +58,7 @@ python scripts.py evaluate --model models/visual_policy.npz --layouts configs/of
 
 将本目录（包括 `models/visual_policy.npz` 和布局 JSON）复制到 Ubuntu，安装 `requirements.txt` 中指定的依赖后即可运行相同的评估命令。无需图形桌面或在 Ubuntu 上重新训练。
 
-本交付包已在 WSL2 Ubuntu 上验证，运行环境为 Python 3.12.3、NumPy 1.26.4、Pillow 10.4.0。7 项感知测试全部通过；示例布局评估为 1/1 成功、61 步。seed 5000 的 30 布局评估及 seed 777 的 200 布局评估均已运行。200 布局的教师、融合策略、纯 MLP 分别为 172/200、172/200、126/200，与保存日志一致。此处验证的是 WSL2 Linux 环境，不等同于老师的正式评估环境。
+本交付包已在 WSL2 Ubuntu 上验证，运行环境为 Python 3.12.3、NumPy 1.26.4、Pillow 10.4.0；当时 7 项感知测试全部通过。当前 Windows Python 3.11 环境下 8 项回归测试全部通过。示例布局评估为 1/1 成功、61 步。seed 5000 的 30 布局评估及 seed 777 的 200 布局评估均已运行。200 布局的教师、融合策略、纯 MLP 分别为 172/200、172/200、126/200，与保存日志一致。此处验证的是独立模拟环境，不等同于老师的正式评估环境。
 
 ## 当前随机留出结果
 

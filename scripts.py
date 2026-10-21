@@ -155,14 +155,14 @@ def play(args):
 
     model = MLP.load(args.model)
     layouts = _read_layouts(args.layouts, args.episodes, args.seed)
-    if not layouts:
-        raise SystemExit("No layouts were loaded")
+    if len(layouts) != 1:
+        raise SystemExit("play expects exactly one layout")
 
     root = tk.Tk()
     root.title("Save the Prey")
     root.resizable(False, False)
     env = SaveThePrey(seed=args.seed, max_steps=args.max_steps)
-    state = {"layout_index": 0, "paused": False, "image": None, "previous": None,
+    state = {"paused": False, "image": None, "previous": None,
              "photo": None, "finished": False}
 
     image_label = ttk.Label(root)
@@ -175,7 +175,7 @@ def play(args):
     def reset_layout():
         state["previous"] = None
         state["finished"] = False
-        state["image"] = env.reset(layouts[state["layout_index"]])
+        state["image"] = env.reset(layouts[0])
         update_view()
 
     def update_view():
@@ -184,12 +184,10 @@ def play(args):
             pil_image = pil_image.resize((args.display_size, args.display_size), Image.Resampling.LANCZOS)
         state["photo"] = ImageTk.PhotoImage(pil_image)
         image_label.configure(image=state["photo"])
-        layout = layouts[state["layout_index"]]
         status = env.status
         if state["paused"] and status == "running":
             status = "paused"
-        round_text = f"Round {state['layout_index'] + 1:02d}/{len(layouts):02d}    |    "
-        status_label.configure(text=f"{round_text}{layout.name}    |    {status}    |    {env.steps} steps")
+        status_label.configure(text=f"{layouts[0].name}    |    {status}    |    {env.steps} steps")
 
     def toggle_pause(_event=None):
         if env.status != "running":
@@ -201,21 +199,14 @@ def play(args):
         state["paused"] = False
         reset_layout()
 
-    def next_layout(_event=None):
-        state["paused"] = False
-        state["layout_index"] = (state["layout_index"] + 1) % len(layouts)
-        reset_layout()
-
     def toggle_fullscreen(_event=None):
         root.attributes("-fullscreen", not root.attributes("-fullscreen"))
 
     ttk.Button(controls, text="暂停 / 继续", command=toggle_pause).pack(side="left")
     ttk.Button(controls, text="重新开始", command=restart).pack(side="left", padx=(8, 0))
-    ttk.Button(controls, text="下一布局", command=next_layout).pack(side="left", padx=(8, 0))
-    ttk.Label(controls, text="空格：暂停    R：重开    →：下一布局    F11：全屏").pack(side="right")
+    ttk.Label(controls, text="空格：暂停    R：重开    F11：全屏").pack(side="right")
     root.bind("<space>", toggle_pause)
     root.bind("r", restart)
-    root.bind("<Right>", next_layout)
     root.bind("<F11>", toggle_fullscreen)
     root.bind("<Escape>", lambda _event: root.attributes("-fullscreen", False))
 
@@ -256,9 +247,9 @@ def main():
     eval_parser.add_argument("--seed", type=int, default=5000)
     eval_parser.add_argument("--output", type=Path, default=RESULTS_DEFAULT / "evaluation.json")
     eval_parser.set_defaults(func=evaluate)
-    play_parser = commands.add_parser("play", help="play supplied or random layouts in an animation window")
+    play_parser = commands.add_parser("play", help="play one test layout in an animation window")
     play_parser.add_argument("--model", type=Path, default=MODEL_DEFAULT)
-    play_parser.add_argument("--layouts", type=Path)
+    play_parser.add_argument("--layouts", type=Path, default=ROOT / "configs" / "official_test_layout.json")
     play_parser.add_argument("--episodes", type=int, default=1)
     play_parser.add_argument("--max-steps", type=int, default=1200)
     play_parser.add_argument("--mlp-weight", type=float, default=0.25)
