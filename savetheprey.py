@@ -60,6 +60,11 @@ class SaveThePrey:
         )
         self.steps = 0
         self.reset()
+        # The policy needs the instructor renderer's framebuffer, but Tkinter
+        # is the sole user-facing animation window.
+        for viewer in self.teacher_env.viewers:
+            if viewer is not None:
+                viewer.window.set_visible(False)
 
     def sample_layout(self, name: str = "random") -> EpisodeLayout:
         obstacles = OBSTACLES.copy()
