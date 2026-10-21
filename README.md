@@ -1,6 +1,6 @@
 # Save the Prey
 
-本课设使用老师提供的 `multiagent` 环境源码承载追逃场景、物理积分、碰撞和 RGB 渲染。适配层保留现有的图像特征提取、NumPy MLP 行为克隆、势场安全控制器和追击者控制。猎物策略只读取渲染图像推导出的特征，并输出二维有界加速度。
+本课设基于 `multiagent` 追逃仿真框架，包含场景、物理积分、碰撞处理和 RGB 渲染。适配层保留现有的图像特征提取、NumPy MLP 行为克隆、势场安全控制器和追击者控制。猎物策略只读取渲染图像推导出的特征，并输出二维有界加速度。
 
 ## 环境安装
 
@@ -10,7 +10,7 @@
 python -m pip install -r requirements.txt
 ```
 
-老师的 Pyglet 渲染器通过 OpenGL 窗口提供 RGB 帧，因此训练、评估和动画需要可用的图形桌面。无桌面 Linux 服务器需要配置虚拟显示环境。
+Pyglet 渲染器通过 OpenGL 提供 RGB 帧，因此训练、评估和动画需要可用的图形桌面。无桌面 Linux 服务器需要配置虚拟显示环境。
 
 ## 训练
 
@@ -40,11 +40,11 @@ python scripts.py play --layouts configs/official_test_layout.json --mlp-weight 
 
 正式布局保存在 `configs/official_test_layout.json`。其他测试坐标可参照 `configs/official_layouts.example.json`，每个布局需提供追击者、被追者、目标点和三个障碍物的二维坐标，坐标范围为 `[-1, 1]`。
 
-## 环境源码
+## 仿真实现
 
-`multiagent/` 中包含老师压缩包提供的核心环境文件：`core.py`、`environment.py`、`multi_discrete.py`、`rendering.py`、`scenario.py` 和 `scenarios/simple_tag.py`。项目不调用老师代码中的 PPO 实现；策略仍由现有 NumPy MLP 与安全控制器组成。当前依赖见 `requirements.txt`。
+`multiagent/` 中包含核心环境文件：`core.py`、`environment.py`、`multi_discrete.py`、`rendering.py`、`scenario.py` 和 `scenarios/simple_tag.py`。策略使用 NumPy MLP 与安全控制器，不依赖 PPO 实现。依赖见 `requirements.txt`。
 
-当前老师环境验证：随附模型在正式测试坐标下成功到达目标，用时 98 步；seed 5000 的 30 个随机布局评估成功 26 次（86.7%），平均 48.9 步。对应日志为 `results/official_test_teacher_env.json` 和 `results/teacher_env_holdout_seed5000.json`。其他旧评估日志由独立 Pillow 模拟器生成，属于历史记录，不代表老师环境下的评估结果。
+当前仿真验证：随附模型在正式测试坐标下成功到达目标，用时 98 步；seed 5000 的 30 个随机布局评估成功 26 次（86.7%），平均 48.9 步。对应日志为 `results/official_test_teacher_env.json` 和 `results/teacher_env_holdout_seed5000.json`。其他旧评估日志由 Pillow 简化模拟器生成，属于历史记录，与当前仿真设置不同。
 
 运行回归测试：
 
