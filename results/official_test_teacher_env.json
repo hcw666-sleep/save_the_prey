@@ -1,0 +1,40 @@
+{
+  "seed": 5000,
+  "model": "models/visual_policy.npz",
+  "mlp_weight": 0.25,
+  "episodes": 1,
+  "rates": {
+    "success": 1.0,
+    "captured": 0.0,
+    "obstacle_collision": 0.0,
+    "out_of_bounds": 0.0,
+    "timeout": 0.0
+  },
+  "mean_steps": 98.0,
+  "counts": {
+    "success": 1,
+    "captured": 0,
+    "obstacle_collision": 0,
+    "out_of_bounds": 0,
+    "timeout": 0
+  },
+  "episodes_detail": [
+    {
+      "name": "official_test_condition",
+      "status": "success",
+      "steps": 98,
+      "prey_final": [
+        0.49214819635910395,
+        -0.4412822840932332
+      ],
+      "predator_final": [
+        0.4061489397202651,
+        -0.36773846477460714
+      ],
+      "shelter": [
+        0.5,
+        -0.5
+      ]
+    }
+  ]
+}

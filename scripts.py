@@ -36,6 +36,7 @@ def _collect_data(episodes: int, seed: int, max_steps: int):
             if status != "running":
                 outcomes[status] = outcomes.get(status, 0) + 1
                 break
+    env.close()
     return np.asarray(features, dtype=np.float32), np.asarray(labels, dtype=np.float32), outcomes
 
 
@@ -101,14 +102,16 @@ def _layout_from_dict(value: dict, index: int) -> EpisodeLayout:
 def _read_layouts(path: Path | None, episodes: int, seed: int):
     if path is None:
         env = SaveThePrey(seed=seed)
-        return [env.sample_layout(f"random_{i + 1:03d}") for i in range(episodes)]
+        layouts = [env.sample_layout(f"random_{i + 1:03d}") for i in range(episodes)]
+        env.close()
+        return layouts
     data = json.loads(path.read_text(encoding="utf-8-sig"))
     values = data["layouts"] if isinstance(data, dict) else data
     return [_layout_from_dict(value, i) for i, value in enumerate(values)]
 
 
-def _run_layout(layout: EpisodeLayout, model: MLP | None, weight: float, max_steps: int):
-    env = SaveThePrey(seed=0, max_steps=max_steps)
+def _run_layout(layout: EpisodeLayout, model: MLP | None, weight: float, max_steps: int,
+                env: SaveThePrey):
     image = env.reset(layout)
     previous = None
     for _ in range(max_steps):
@@ -126,7 +129,12 @@ def _run_layout(layout: EpisodeLayout, model: MLP | None, weight: float, max_ste
 def evaluate(args):
     model = None if args.teacher_baseline else MLP.load(args.model)
     layouts = _read_layouts(args.layouts, args.episodes, args.seed)
-    results = [_run_layout(layout, model, args.mlp_weight, args.max_steps) for layout in layouts]
+    env = SaveThePrey(seed=0, max_steps=args.max_steps)
+    try:
+        results = [_run_layout(layout, model, args.mlp_weight, args.max_steps, env)
+                   for layout in layouts]
+    finally:
+        env.close()
     counts = {key: sum(row["status"] == key for row in results)
               for key in ("success", "captured", "obstacle_collision", "out_of_bounds", "timeout")}
     summary = {
@@ -162,6 +170,7 @@ def play(args):
     root.title("Save the Prey")
     root.resizable(False, False)
     env = SaveThePrey(seed=args.seed, max_steps=args.max_steps)
+    root.protocol("WM_DELETE_WINDOW", lambda: (env.close(), root.destroy()))
     state = {"paused": False, "image": None, "previous": None,
              "photo": None, "finished": False}
 
